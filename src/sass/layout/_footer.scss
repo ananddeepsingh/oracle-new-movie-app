@@ -1,0 +1,25 @@
+#movieApp .ant-layout-footer {
+  background: $grey;
+  color: $white;
+}
+
+#footerNav {
+  display: flex;
+  list-style: none;
+
+  li {
+    float: left;
+
+    a {
+      color: $white;
+      display: block;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+
+      &:first-child {
+        padding-left: 0;
+      }
+    }
+  }
+}

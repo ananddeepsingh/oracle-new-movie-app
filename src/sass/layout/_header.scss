@@ -1,0 +1,24 @@
+#movieApp {
+  .ant-layout-header {
+    background: linear-gradient(0deg, rgba(0, 108, 254, 1) 0%, rgba(0, 152, 255, 1) 58%, rgba(0, 212, 255, 1) 100%);
+    box-shadow: 17px 1px $grey;
+  }
+
+  .logo {
+    color: $white;
+  }
+
+  .trial {
+    background: $grey;
+    color: $white;
+    padding: 10px 12px;
+    margin: 0 0 0 30px;
+    font-size: 12px;
+  }
+}
+
+header {
+  a {
+    color: $white;
+  }
+}
