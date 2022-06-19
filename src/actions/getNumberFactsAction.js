@@ -1,13 +1,14 @@
-import { LoginService } from '../services/login.service';
+// Service
+import { GetFactsService } from '../services/getFactsService';
+
 //Types
 import {
-  CLEAR_MESSAGE,
-  LOGIN_SUCCESS,
+  GET_FACTS_SUCCESS,
   SET_MESSAGE
 } from '../types';
 
-export const loginAction = (number) => async (dispatch) => {
-  const { response, error } = await LoginService(number);
+export const getNumberFactsAction = (number) => async (dispatch) => {
+  const { response, error } = await GetFactsService(number);
 
   if (error) {
     const message = error?.message?.data?.message || error?.message || error?.toString() || "Something went wrong";
@@ -21,7 +22,7 @@ export const loginAction = (number) => async (dispatch) => {
   }
 
   return dispatch({
-    type: LOGIN_SUCCESS,
+    type: GET_FACTS_SUCCESS,
     payload: response
   });
 }

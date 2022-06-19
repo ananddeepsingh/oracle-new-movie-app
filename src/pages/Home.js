@@ -1,5 +1,4 @@
 import {
-  Layout,
   Row,
   Col
 } from 'antd';

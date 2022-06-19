@@ -6,8 +6,7 @@ import {
   Modal
 } from 'antd';
 
-
-// React
+// React and Redux
 import {
   useEffect,
   useState
@@ -16,9 +15,10 @@ import {
   useDispatch,
   useSelector
 } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // Action
-import { loginAction } from 'actions/login.action';
+import { getNumberFactsAction } from 'actions/getNumberFactsAction';
 
 // Components
 import ModalBox from 'components/modalBox';
@@ -26,11 +26,13 @@ import MovieTile from 'components/movieTile';
 
 // Database
 import MovieDatabase from '../assets/data/sample.json'
-import { Link } from 'react-router-dom';
+import { clearMessageAction } from 'actions/errorMessageAction';
 
 const Series = () => {
   const dispatch = useDispatch();
-  const { fact } = useSelector((state) => state.auth);
+  const { fact } = useSelector((state) => state.facts);
+  const store = useSelector((state) => state);
+  console.log(store)
   const [seriesDataset, setSeriesDataset] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFactModalVisible, setIsFactModalVisible] = useState(false);
@@ -58,8 +60,14 @@ const Series = () => {
   }
 
   const handleOk = async (releaseYear) => {
+    // page loading start
     setIsPageLoading(true);
-    await dispatch(loginAction(+releaseYear));
+
+    // clear error messages
+    dispatch(clearMessageAction());
+    await dispatch(getNumberFactsAction(+releaseYear));
+
+    // handling show and hide of Modal box and page loader end
     setIsPageLoading(false);
     setIsModalVisible(!isModalVisible);
     setIsFactModalVisible(!isFactModalVisible)
@@ -112,6 +120,7 @@ const Series = () => {
       {seriesDataset?.entries?.length > 0 && renderData()}
     </div>
 
+    {/* Modal Box */}
     <ModalBox
       title={modalBoxTitle}
       isModalVisible={isModalVisible}
@@ -121,6 +130,7 @@ const Series = () => {
       releaseYear={selectedReleaseYear}
     />
 
+    {/* Fun Fact Modal */}
     {fact?.length > 0 && <Modal
       title={"Fun Fact"}
       visible={isFactModalVisible}

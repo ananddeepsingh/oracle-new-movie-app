@@ -4,7 +4,7 @@ import {
   SET_MESSAGE
 } from '../types';
 
-const initialState = {};
+const initialState = "";
 
 const errorMessageReducer = (state = initialState, action) => {
   const {

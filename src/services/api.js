@@ -4,7 +4,7 @@ import {
   validateStatusCode
 } from "../utils/api.helper"
 
-const BASE_URL = "http://numbersapi.com/";
+const BASE_URL = process.env.REACT_APP_NUMBER_API_PATH;
 
 export const POST_API = (url, data = {}) => {
   return fetch(`${BASE_URL}/${url}`, {

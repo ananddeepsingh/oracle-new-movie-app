@@ -1,8 +1,10 @@
+// Antd
 import {
   Row,
   Col,
-  Spin,
 } from 'antd';
+
+// React
 import {
   useEffect,
   useState
@@ -20,8 +22,6 @@ import Pagination from 'components/pagination';
 
 const Movies = () => {
 
-  const [seriesDataset, setSeriesDataset] = useState([]);
-  const [isPageLoading, setIsPageLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalBoxTitle, setModalBoxTitle] = useState("");
   const [movieDescription, setMovieDescription] = useState("");
@@ -42,9 +42,6 @@ const Movies = () => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     currentMovies = moviesDatabase.slice(indexOfFirstPost, indexOfLastPost)
   }
-
-
-  console.log(moviesDatabase, "moviesDatabase")
 
   const handleTileClick = (tile) => {
     const selectedMovie = MovieDatabase.entries.find(movie => movie.title === tile);
@@ -95,20 +92,19 @@ const Movies = () => {
     </Row>
   }
 
-  console.log(currentPageNumber)
   const paginate = (currentNumber) => setCurrentPageNumber(currentNumber)
 
-  return <Spin spinning={isPageLoading} tip="Loading...">
+  return <div>
     <div className="page-heading"><Link to="/">Movies</Link></div>
-    <div className="page-content">
+    {currentMovies?.length > 0 && <div className="page-content">
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={moviesDatabase?.length}
         paginate={paginate}
       />
 
-      {currentMovies?.length > 0 && renderData()}
-    </div>
+      {renderData()}
+    </div>}
 
     <ModalBox
       title={modalBoxTitle}
@@ -119,7 +115,7 @@ const Movies = () => {
       releaseYear={selectedReleaseYear}
     />
 
-  </Spin>
+  </div>
 }
 
 export default Movies;

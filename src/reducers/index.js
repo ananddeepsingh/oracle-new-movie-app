@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import authReducer from './auth.reducer';
-import errorMessageReducer from './errorMessage.reducer';
+import getFactsReducer from './getFactsReducer';
+import errorMessageReducer from './errorMessageReducer';
 
 const combinedReducer = combineReducers({
-  auth: authReducer,
+  facts: getFactsReducer,
   errorMessage: errorMessageReducer
 });
 
