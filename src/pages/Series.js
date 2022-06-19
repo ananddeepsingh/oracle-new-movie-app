@@ -18,7 +18,7 @@ import {
 import { Link } from 'react-router-dom';
 
 // Action
-import { getNumberFactsAction } from 'actions/getNumberFactsAction';
+import { getFactsAction } from 'actions/getFactsAction';
 
 // Components
 import ModalBox from 'components/modalBox';
@@ -31,6 +31,7 @@ import { clearMessageAction } from 'actions/errorMessageAction';
 const Series = () => {
   const dispatch = useDispatch();
   const { fact } = useSelector((state) => state.facts);
+  const { errorMessageTxt } = useSelector((state) => state.errorMessage);
   const store = useSelector((state) => state);
   console.log(store)
   const [seriesDataset, setSeriesDataset] = useState([]);
@@ -65,7 +66,20 @@ const Series = () => {
 
     // clear error messages
     dispatch(clearMessageAction());
-    await dispatch(getNumberFactsAction(+releaseYear));
+    await dispatch(getFactsAction(+releaseYear))
+      .then((data) => {
+        if (data.error) {
+          // Showing error to user
+          Modal.error({
+            title: 'Error',
+            content: (
+              <div>
+                <p>{data.error}</p>
+              </div>
+            ),
+          })
+        }
+      })
 
     // handling show and hide of Modal box and page loader end
     setIsPageLoading(false);
@@ -115,7 +129,7 @@ const Series = () => {
   }
 
   return <Spin spinning={isPageLoading} tip="Loading...">
-    <div className="page-heading"><Link to="/">Series</Link></div>
+    <div className="page-heading"><Link to="/">Home</Link></div>
     <div className="page-content">
       {seriesDataset?.entries?.length > 0 && renderData()}
     </div>

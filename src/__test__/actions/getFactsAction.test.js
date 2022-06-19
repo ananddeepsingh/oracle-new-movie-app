@@ -1,5 +1,5 @@
 // Action
-import { getNumberFactsAction } from 'actions/getNumberFactsAction';
+import { getFactsAction } from 'actions/getFactsAction';
 
 // Mock Store and thunk
 import configureMockStore from 'redux-mock-store';
@@ -18,7 +18,7 @@ describe("get Number Facts Action", () => {
     store.clearActions();
   });
 
-  it("should get number facts", async () => {
+  it("should get facts", async () => {
 
     //arrange
     const serverResponse = {
@@ -29,7 +29,7 @@ describe("get Number Facts Action", () => {
     //act
     fetch.mockReturnValue(Promise.resolve(new Response(JSON.stringify(response))));
 
-    await store.dispatch(getNumberFactsAction(5));
+    await store.dispatch(getFactsAction(5));
     const actualActions = store.getActions().map((action) => action.type);
 
     //assert

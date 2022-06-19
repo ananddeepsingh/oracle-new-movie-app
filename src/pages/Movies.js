@@ -95,7 +95,7 @@ const Movies = () => {
   const paginate = (currentNumber) => setCurrentPageNumber(currentNumber)
 
   return <div>
-    <div className="page-heading"><Link to="/">Movies</Link></div>
+    <div className="page-heading"><Link to="/">Home</Link></div>
     {currentMovies?.length > 0 && <div className="page-content">
       <Pagination
         postsPerPage={postsPerPage}

@@ -7,7 +7,7 @@ import {
   SET_MESSAGE
 } from '../types';
 
-export const getNumberFactsAction = (number) => async (dispatch) => {
+export const getFactsAction = (number) => async (dispatch) => {
   const { response, error } = await GetFactsService(number);
 
   if (error) {
@@ -18,7 +18,10 @@ export const getNumberFactsAction = (number) => async (dispatch) => {
       payload: message
     });
 
-    return false;
+    return {
+      response: null,
+      error: message
+    };
   }
 
   return dispatch({
